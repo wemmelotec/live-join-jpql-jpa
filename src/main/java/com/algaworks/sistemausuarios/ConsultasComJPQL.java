@@ -90,8 +90,9 @@ public class ConsultasComJPQL {
         List<Usuario> lista = typedQuery.getResultList();
         lista.forEach(u -> System.out.println(u.getId() + ", " + u.getNome()));
     }
-
+    
     public static void fazendoLeftJoin(EntityManager entityManager) {
+       
         String jpql = "select u, c from Usuario u left join u.configuracao c";
         TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
         List<Object[]> lista = typedQuery.getResultList();
@@ -109,6 +110,8 @@ public class ConsultasComJPQL {
     }
 
     public static void fazendoJoins(EntityManager entityManager) {
+        //select u.* from usuario u join dominio d on u.dominio_id = d.id;
+        //select u from Usuario u join u.dominio" só essa linha já era suficiente para trazer a relação
         String jpql = "select u from Usuario u join u.dominio d where d.id = 1";
         TypedQuery<Usuario> typedQuery = entityManager.createQuery(jpql, Usuario.class);
         List<Usuario> lista = typedQuery.getResultList();
